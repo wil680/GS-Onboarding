@@ -28,12 +28,17 @@ class MainCommand(BaseSQLModel, table=True):
     @model_validator(mode="after")
     def validate_params_format(self):
         """
-        Check that params and format are both None or that the params and format have the same number of comma seperated values.
+        Check that params and format are both None or that the params and format 
+        have the same number of comma seperated values.
         In either of these cases return self. Otherwise raise a ValueError.
-        The format of the comma seperated values is "data1,data2" so no spaces between data and the commas.
+        The format of the comma seperated values is "data1,data2" so no spaces 
+        between data and the commas.
         """
         # TODO: (Member) Implement this method
-        return self
+        # If params and format are None OR params has the same number of commas as format (same number of comma separated values) return self 
+        if (self.params == None and self.format == None) or (self.params.count(",") == self.format.count(",")):
+            return self
+        raise ValueError
 
 
 class Command(BaseSQLModel, table=True):
