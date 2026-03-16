@@ -18,5 +18,6 @@ class LoggerMiddleware(BaseHTTPMiddleware):
         :return: Response from endpoint
         """
         # TODO:(Member) Finish implementing this method
+        
         response = await call_next(request)
         return response
