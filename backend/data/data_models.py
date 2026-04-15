@@ -36,7 +36,7 @@ class MainCommand(BaseSQLModel, table=True):
         """
         # TODO: (Member) Implement this method
         # If params and format are None OR params has the same number of commas as format (same number of comma separated values) return self 
-        if (self.params == None and self.format == None) or (self.params.count(",") == self.format.count(",")):
+        if (self.params == None and self.format == None) or (self.params is not None and self.format is not None and self.params.count(",") == self.format.count(",")):
             return self
         raise ValueError
 
