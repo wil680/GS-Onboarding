@@ -24,9 +24,9 @@ class LoggerMiddleware(BaseHTTPMiddleware):
         response = await call_next(request)
         
         end_time = datetime.now()
-        duration = end_time - start_time
+        duration = (end_time - start_time)*1000 # Convert duration to milliseconds
         params = request.query_params
 
-        logger.info(f"Start Time: {start_time}, End Time: {end_time}, Duration: {duration}, Params: {params}")
+        logger.info(f"Start Time: {start_time}, End Time: {end_time}, Duration: {duration}ms, Params: {params}")
 
         return response

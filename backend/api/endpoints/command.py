@@ -51,8 +51,9 @@ def delete_command(id: int, db: Session = Depends(get_db)):
     # TODO:(Member) Implement this endpoint
     db_item_to_delete = db.exec(select(Command).where(Command.id == id)).first()
 
-    if db_item_to_delete:
-        db.delete(db_item_to_delete)
-        db.commit()
-        return {"data": db.exec(select(Command)).all()}
-    raise HTTPException(status_code=404)
+    if not db_item_to_delete: 
+        raise HTTPException(status_code=404)
+
+    db.delete(db_item_to_delete)
+    db.commit()
+    return {"data": db.exec(select(Command)).all()}
